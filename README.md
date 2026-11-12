@@ -1,87 +1,135 @@
-# Stock Herramienta Pro — Tienda + Panel (Next.js + Supabase)
+# 📦 Stock Herramienta Pro — E-commerce & Panel de Inventario en Tiempo Real
 
-## Pantallas
+[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-**Tienda**
+Plataforma full-stack de comercio electrónico y gestión operativa para negocios de distribución y venta de herramientas/maquinaria. Diseñada para sustituir el control manual en hojas de cálculo por un flujo centralizado: catálogo público de alta conversión, checkout transaccional directo a WhatsApp y panel administrativo con control estricto de inventario.
 
-| Ruta | Pantalla |
-| --- | --- |
-| `/` | Inicio (hero, beneficios, categorías, destacados, mayoreo) |
-| `/catalogo` | Catálogo con filtros, orden, búsqueda y paginación |
-| `/producto/[slug]` | Detalle: galería, descripción, qué incluye, carrito |
-| `/ofertas` | Ofertas: contador, oferta del día y productos con % de descuento |
-| `/sucursales` | Sucursales con mapa, horario y contacto |
-| `/checkout` | Datos del cliente y entrega → guarda el pedido y abre WhatsApp |
+---
 
-**Panel de administrador** (`/admin`, requiere iniciar sesión)
+## 📸 Capturas de la Plataforma
 
-| Ruta | Para qué sirve |
-| --- | --- |
-| `/admin` | Resumen: productos, piezas en stock, pedidos nuevos y alertas de poco stock |
-| `/admin/productos` | Lista con búsqueda y filtros (poco stock, agotados, ocultos); cambiar stock al momento |
-| `/admin/productos/nuevo` y `/admin/productos/[id]` | Crear/editar: categoría, precio, stock, fotos, especificaciones, visible/oculto |
-| `/admin/pedidos` | Pedidos por estado; al cancelar uno, las piezas regresan al stock |
-| `/admin/ofertas` | Oferta del día y precios de oferta (con atajos de -10/-15/-20 %) |
+### 1. Portada y Catálogo Principal
+Vista de inicio con banners de oferta, buscador en tiempo real, categorías y llamadas a la acción comerciales.
+![Portada Principal](docs/screenshots/01-home.png)
 
-Stack: **Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Supabase (Postgres + Storage + Auth)**.
+### 2. Catálogo Interactivo con Filtros Dinámicos
+Filtrado por marcas, categorías, rango de precio, ordenamiento y control de stock disponible.
+![Catálogo Interactivo](docs/screenshots/02-catalogo.png)
 
-## Cómo correrlo
+### 3. Ficha Técnica de Producto & Conversión
+Detalle de producto con cálculo dinámico de descuentos, especificaciones técnicas y adición rápida al carrito.
+![Ficha Técnica](docs/screenshots/03-producto.png)
 
+### 4. Panel de Control Administrativo (`/admin`)
+Gestión centralizada de stock, pedidos entrantes, catálogo de productos y alertas de inventario bajo.
+![Panel Administrativo](docs/screenshots/04-admin.png)
+
+---
+
+## ⚡ Características Principales
+
+### 🛒 Experiencia de Compra (Storefront)
+- **Catálogo Dinámico:** Filtrado instantáneo por categoría, marca, precio y disponibilidad.
+- **Carrito Persistente:** Cálculo automático de subtotales, promociones y piezas en tiempo real.
+- **Checkout directo a WhatsApp:** Generación automática del resumen estructurado del pedido con un clic, conectando al cliente directamente con el equipo de ventas de la sucursal más cercana.
+- **Módulo de Ofertas:** Sistema de descuentos por porcentaje y cuenta regresiva diaria.
+
+### 🛡️ Panel de Gestión Administrativa (`/admin`)
+- **Control Atómico de Inventario:** Los pedidos descuentan stock a nivel de base de datos de forma transaccional; si se cancela una orden, las piezas se reincorporan automáticamente.
+- **Alertas de Stock Crítico:** Identificación visual de productos agotados o próximos a agotarse.
+- **CRUD Completo de Catálogo:** Creación y edición de productos, subida de imágenes a bucket de almacenamiento y control de visibilidad en tienda.
+- **Seguridad y Permisos:** Autenticación protegida por roles para administradores mediante Supabase Auth y validación en servidor.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+| Capa | Tecnología | Propósito |
+|---|---|---|
+| **Frontend** | Next.js 15 (App Router) + React 19 | SSR, Server Components y rendimiento optimizado |
+| **Lenguaje** | TypeScript 5.6 | Tipado estricto y prevención de errores en compilación |
+| **Estilos** | Tailwind CSS v4 | Diseño responsivo moderno y estilizado sin sobrecarga |
+| **Base de Datos** | PostgreSQL (Supabase) | Persistencia relacional, transacciones ACID y RPCs |
+| **Almacenamiento** | Supabase Storage | Gestión y entrega de imágenes de catálogo |
+| **Iconografía** | Lucide React | Iconos vectoriales limpios y accesibles |
+
+---
+
+## 🚀 Instalación y Puesta en Marcha
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/https-Gabo/stock_.git
+cd stock_
+```
+
+### 2. Instalar dependencias
 ```bash
 npm install
+```
+
+### 3. Configurar Variables de Entorno
+Copia el archivo `.env.example` a `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+Configura tus credenciales de Supabase:
+```env
+NEXT_PUBLIC_SUPABASE_URL=tu_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+ADMIN_EMAILS=tu_correo@ejemplo.com
+```
+
+> **Nota:** La aplicación cuenta con un modo de respaldo con datos de prueba (*mock data*) para poder visualizar la tienda y el catálogo completo inmediatamente sin necesidad de conectar la base de datos de inmediato.
+
+### 4. Inicializar la Base de Datos (Opcional)
+Ejecuta el script SQL en el editor de Supabase:
+```bash
+cat supabase/schema.sql
+```
+
+### 5. Iniciar Servidor de Desarrollo
+```bash
 npm run dev
 ```
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la tienda en vivo.
 
-Abre http://localhost:3000. Sin Supabase configurado, la tienda funciona con los datos de ejemplo de `src/lib/data/` y el panel muestra las instrucciones de configuración.
+---
 
-## Conectar Supabase (una sola vez)
-
-1. Crea una cuenta y un proyecto en [supabase.com](https://supabase.com) (plan gratis). Región recomendada: la más cercana a México (p. ej. `us-east`).
-2. **SQL Editor → New query**: pega todo `supabase/schema.sql` y dale **Run**. Crea las tablas, permisos, las funciones de pedidos y la carpeta de fotos.
-3. **Project Settings → API**: copia `.env.example` como `.env.local` y llena:
-   - `NEXT_PUBLIC_SUPABASE_URL` → Project URL
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` → llave `anon` / `public`
-   - `SUPABASE_SERVICE_ROLE_KEY` → llave `service_role` (**secreta**: nunca la compartas)
-   - `ADMIN_EMAILS` → correo(s) del administrador, separados por coma
-4. **Authentication → Users → Add user**: crea el usuario con ese mismo correo y una contraseña. (Recomendado: en **Authentication → Sign In / Providers** desactiva "Allow new users to sign up".)
-5. Reinicia `npm run dev`, entra a http://localhost:3000/admin e inicia sesión.
-6. En el Resumen aparece **"Importar los 29 productos"**: carga el catálogo de ejemplo para empezar a ajustar precios, stock y fotos.
-
-## Cómo funciona
-
-- `src/lib/api.ts` es el único lugar donde la tienda pide datos (Supabase si está configurado, si no, datos de ejemplo).
-- `src/lib/admin-data.ts` y `src/app/admin/actions.ts` son las lecturas y cambios del panel. Todos comprueban que haya sesión de administrador.
-- Los pedidos se crean con la función `create_order` de la base: usa los precios guardados (no los del navegador), descuenta stock y falla si no alcanzan las piezas.
-- Las fotos se suben a Supabase Storage (carpeta `productos`). La primera foto es la principal.
-- Al guardar cualquier cambio en el panel, la tienda se actualiza al momento.
-
-## Estructura
+## 📂 Arquitectura del Proyecto
 
 ```
-src/
-├─ app/
-│  ├─ (tienda)/              ← Páginas de la tienda (con header, footer y carrito)
-│  │  └─ checkout/           ← Formulario de pedido + acción que lo guarda
-│  ├─ admin/
-│  │  ├─ login/              ← Inicio de sesión
-│  │  ├─ (panel)/            ← Resumen, productos, pedidos, ofertas
-│  │  └─ actions.ts          ← Guardar producto, subir fotos, stock, pedidos, ofertas
-│  └─ layout.tsx             ← Fuentes y <html>
-├─ components/
-│  ├─ admin/                 ← Formularios y tablas del panel
-│  └─ …                      ← Componentes de la tienda
-├─ lib/
-│  ├─ api.ts                 ← Datos de la tienda
-│  ├─ admin-data.ts          ← Datos del panel
-│  ├─ auth.ts                ← Quién es administrador
-│  ├─ db.ts                  ← Conversión filas ↔ tipos
-│  ├─ supabase/              ← Clientes de Supabase
-│  └─ data/                  ← Datos de ejemplo
-supabase/schema.sql          ← Base de datos completa
+stock/
+├── docs/
+│   └── screenshots/         # Capturas de pantalla de la plataforma
+├── public/                  # Activos estáticos e imágenes de productos
+├── src/
+│   ├── app/
+│   │   ├── (tienda)/        # Rutas públicas (catálogo, ofertas, checkout)
+│   │   ├── admin/           # Panel administrativo y acciones de servidor
+│   │   └── layout.tsx       # Layout global y fuentes
+│   ├── components/          # Componentes modulares (UI, tablas, modal)
+│   ├── lib/
+│   │   ├── api.ts           # Capa de abstracción de datos
+│   │   ├── admin-data.ts    # Consultas y mutaciones del panel
+│   │   ├── db.ts            # Mapeo de datos relacionales
+│   │   └── supabase/        # Clientes y conexión de base de datos
+│   └── types/               # Definiciones e interfaces de TypeScript
+└── supabase/
+    └── schema.sql           # Esquema completo de BD, políticas RLS y triggers
 ```
 
-## Pendientes
+---
 
-- Las **sucursales** (direcciones, teléfonos, WhatsApp, horarios) siguen en `src/lib/data/branches.ts` y son de ejemplo. El WhatsApp de cada sucursal es a donde llegan los pedidos.
-- Precios, SKUs y especificaciones del catálogo de ejemplo son aproximados: ajústalos desde el panel.
-- Formulario de mayoreo ("Cotizar lote").
+## 👤 Autor
+Desarrollado por **Gabriel Juárez**
+- GitHub: [@https-Gabo](https://github.com/https-Gabo)
+- LinkedIn: [Gabriel Juárez Ramírez](https://linkedin.com/in/gabriel-juarez-ramirez)
+- Correo: `gaby63367@gmail.com`
