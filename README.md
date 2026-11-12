@@ -128,8 +128,12 @@ stock/
 
 ---
 
-## 👤 Autor
-Desarrollado por **Gabriel Juárez**
+## 👥 Autores
+Proyecto desarrollado en equipo por:
+- **Ximena Gudiño** — [@XimenaGud25](https://github.com/XimenaGud25) (repositorio original: [XimenaGud25/stock](https://github.com/XimenaGud25/stock))
+- **Gabriel Juárez** — [@https-Gabo](https://github.com/https-Gabo): puesta en marcha local, documentación técnica y presentación visual del proyecto.
+
+Contacto (Gabriel):
 - GitHub: [@https-Gabo](https://github.com/https-Gabo)
 - LinkedIn: [Gabriel Juárez Ramírez](https://linkedin.com/in/gabriel-juarez-ramirez)
 - Correo: `gaby63367@gmail.com`
